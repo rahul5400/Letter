@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Letter</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="top">
+      <a class="brand" href="/">
+        <span class="mark">Lt</span>
+        <span><strong>Letter</strong><em>Thank-you notes for the club</em></span>
+      </a>
+    </header>
+    <main>
+      <section class="hero">
+        <h1>A short note, set like a card.</h1>
+        <p class="lede">Recipient, your name, and the note. Letter lays it out. No account.</p>
+      </section>
+      <form method="post" action="/" class="stack">
+        <label><span>To</span><input name="recipient" required></label>
+        <label><span>From</span><input name="sender" required></label>
+        <label><span>Note</span><textarea name="note" rows="5" required></textarea></label>
+        <button type="submit">Set the note</button>
+      </form>
+      {% if error %}<p class="flash">{{ error }}</p>{% endif %}
+      {% if result %}
+        <h2 class="section">Your card</h2>
+        {{ result|safe }}
+      {% endif %}
+      <h2 class="section">Recent notes</h2>
+      {% for item in examples %}
+        <article class="letter sample">
+          <p class="dear">Dear {{ item.recipient }},</p>
+          <div class="body"><p>{{ item.note }}</p></div>
+          <p class="sign">— {{ item.sender }}</p>
+        </article>
+      {% endfor %}
+    </main>
+    <footer>Letter is unofficial. It only sets what you type.</footer>
+  </div>
+</body>
+</html>
