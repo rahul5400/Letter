@@ -53,11 +53,12 @@ def compose():
             result=None,
             error="Recipient, sender, and a note are required.",
         ), 400
-    source = LAYOUT.replace("NOTE", note)
+    source = LAYOUT.replace("NOTE", "{{note}}")
     try:
         rendered = app.jinja_env.from_string(source).render(
             recipient=escape(recipient),
             sender=escape(sender),
+            note=escape(note)
         )
     except Exception:
         return render_template(
